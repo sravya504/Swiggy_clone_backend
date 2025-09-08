@@ -1,0 +1,29 @@
+
+
+
+
+install Dependencies
+   
+   1.express
+   2.mongoose
+   3.nodemon
+   4.body-parser
+   5.Dotenv
+   6.jwt token
+   7.bcrypt
+   8.multer // to add images we require
+  
+Connenct to mongodb
+
+
+
+API creation 
+    
+     1.models
+         Vendor:username,email,password
+         firm:firmname,area,category,region,offer,image
+         Product:productName,price,category,image,bestseller,description
+     2.controllers
+         vendorController
+     3.routes
+          vendorRouter  

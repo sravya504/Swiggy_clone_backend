@@ -8,3 +8,4 @@ router.get("/getallvendors",vendorController.getAllVendors)
 router.get("/vendorbyid/:id",vendorController.getVendorById)
 
 module.exports=router; 
+

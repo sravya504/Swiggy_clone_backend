@@ -23,9 +23,10 @@ app.use('/uploads',express.static('uploads'));
 
 
 
-app.use('/',(req,res)=>{
-    console.log("welcome to Swiggy_clone_backend")
-})
+// app.use('/',(req,res)=>{
+//     console.log("welcome to Swiggy_clone_backend")
+// })
+
 const PORT=process.env.PORT || 4000;
 app.listen(PORT,()=>{
     console.log("server started and running successfully");

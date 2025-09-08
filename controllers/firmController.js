@@ -45,21 +45,21 @@ const addFirm=async(req ,res)=>{
 }
 
 
-const deleteFirmById=(req,res)=>{
+const deleteFirmById=async (req,res)=>{
   try{
      const frimId=req.params.productId;
-   const deleteFirm=Firm.findByIdAndDelete(FirmId)
+   const deleteFirm=await Firm.findByIdAndDelete(firmId)
    if(!deleteFirm){
     res.status(200).json({message:"product not found"});
    }
   }
   catch(error){
-       console.log(error.maessage);
+       console.log(error.message);
        res.status(500).json({message:"server error"})
   }
 
 }
 
 //module.exports={addFirm:[upload.single('image'),addFirm]}
-module.exports={addFirm}
+module.exports={addFirm,deleteFirmById}
 

@@ -2,7 +2,7 @@ const Vendor=require("../models/Vendor");
 const Firm=require("../models/Firm");
 const multer=require("multer");
 const Product = require("../models/Product");
-
+const path=require('path')
 
    const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -47,7 +47,7 @@ const addFirm=async(req ,res)=>{
 
 const deleteFirmById=async (req,res)=>{
   try{
-     const frimId=req.params.productId;
+     const firmId=req.params.productId;
    const deleteFirm=await Firm.findByIdAndDelete(firmId)
    if(!deleteFirm){
     res.status(200).json({message:"product not found"});
@@ -60,6 +60,6 @@ const deleteFirmById=async (req,res)=>{
 
 }
 
-//module.exports={addFirm:[upload.single('image'),addFirm]}
-module.exports={addFirm,deleteFirmById}
+module.exports={addFirm:[upload.single('image'),addFirm],deleteFirmById}
+
 

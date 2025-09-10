@@ -7,9 +7,11 @@ const bodyparser=require("body-parser");
 const firmRouter=require("./routes/firmRoutes")
 const productRouter=require("./routes/productRoutes")
 const path=require("path");
+const cors= require("cors")
 
 dotenv.config();
 app.use(bodyparser.json());
+app.use(cors());
 
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>console.log("MongoDB connected"))

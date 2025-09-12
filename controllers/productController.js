@@ -57,16 +57,16 @@ const getProductByFirm=async(req,res)=>{
 }
 
 
-const deleteProductById=(req,res)=>{
+const deleteProductById=async(req,res)=>{
   try{
      const productId=req.params.productId;
-   const deleteProduct=Product.findByIdAndDelete(productId)
+   const deleteProduct= await Product.findByIdAndDelete(productId)
    if(!deleteProduct){
     res.status(200).json({message:"product not found"});
    }
   }
   catch(error){
-       console.log(error.maessage);
+       console.log(error.message);
        res.status(500).json({message:"server error"})
   }
 

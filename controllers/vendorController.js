@@ -6,7 +6,7 @@ const dotenv=require("dotenv");
 dotenv.config();
 const secretKey=process.env.WhatIsYourName;
 
-dotenv.config();
+
 const vendorRegister=async(req,res)=>{
     const {username,email,password}=req.body ;
     try{
@@ -17,18 +17,18 @@ const vendorRegister=async(req,res)=>{
          }
 
           const hashpassword=await bcrypt.hash(password,10);
-          const newVednor=new Vendor({
+          const newVendor=new Vendor({
             username,email,password:hashpassword
           })
-          await newVednor.save();
-          res.status(201).json({message:"vendor registered successfully"})
+          await newVendor.save();
+          res.status(200).json({message:"vendor registered successfully"})
           
           console.log("registered");
 
     }                                               
     catch(err){
         console.log(err);
-        res.status(500).json({meassage:"internal server error"})
+        res.status(500).json({message:"internal server error"})
     }
 
 }
@@ -42,7 +42,12 @@ const vendorLogin=async(req,res)=>{
       return res.status(400).json({message:"Invalid credentials"})
     }
     const token=jwt.sign({vendorId:vendLogin._id},secretKey,{expiresIn:"1h"})
-   res.status(201).json({message:"login successfull",token})
+   res.status(200).json({
+  message: "Login successful",
+  token,
+  vendorId: vendLogin._id
+});
+
    console.log(email);
 
 }
@@ -71,7 +76,25 @@ try{
  if(!vendor){
    return res.status(404).json({message:"vendor not find"});
  }
-  res.status(201).json({vendor})
+  //  const vendorFirmId=vendor.firm[0]._id||null ;
+  let vendorFirmId = null;
+    let vendorFirmname = null;
+
+    if (vendor.firm && vendor.firm.length > 0) {
+      vendorFirmId = vendor.firm[0]._id;
+      vendorFirmname = vendor.firm[0].firmname;
+    }
+   console.log("VendorId:", vendorId, "FirmId:", vendorFirmId);
+
+    res.status(200).json({
+      vendor,
+      vendorFirmId,
+      vendorFirmname
+
+    });
+
+  
+  
 }
 catch(err){
   res.status(500).json({message:"internal server error"});

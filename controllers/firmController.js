@@ -28,14 +28,19 @@ const addFirm=async(req ,res)=>{
     if(!vendor){
         return res.status(404).json({message:"vendor not found"});
     }
-
+    if(vendor.firm.length>0){
+        res.status.json({message:"vendor can have only one firm"})
+     }
     const newfirm=new Firm({
         firmname,area,category,region,offer,image, vendor: vendor._id 
     })
     const savedFirm=await newfirm.save();
+    const firmId=savedFirm._id ;
      vendor.firm.push(savedFirm)
      await vendor.save()
-    return res.status(201).json({message:"firm added successfully"});
+     
+    return res.status(201).json({message:"firm added successfully",firmId});
+
   }
   catch(err){
     console.log(err.message);
